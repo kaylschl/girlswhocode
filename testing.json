@@ -1,0 +1,35 @@
+import json
+file = open("list_of_responses.json", "r")
+a = "".join(file.readlines())
+new_data = ",".join(a.split(']['))
+file.close()
+
+file = open("list_of_responses.json", "w")
+file.write(json.dumps(new_data))
+file.close()
+
+
+
+
+
+import json
+
+
+with open("data.json", "r") as f:
+    # Load our json data into our json object
+    data = json.load(f)
+
+    # Loop through and print
+    for d in data:
+        print(d)
+    print()
+
+    # Find the most common college
+    college_count = {} # hold the counts for each college
+    for d in data:
+        # Add 1 count for each college seen
+        college_count[d["college"]] =  college_count.get(d["college"], 0) + 1
+    print("College by percentage of participants")
+    for college, count in college_count.items():
+        print("{}: {}%".format(college, 100 * count/ len(data)))
+    print()
